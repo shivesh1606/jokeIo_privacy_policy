@@ -39,7 +39,9 @@ const App: React.FC = () => {
   );
 };
 
-const styles = {
+import { CSSProperties } from 'react';
+
+const styles: { [key: string]: CSSProperties } = {
   container: {
     fontFamily: 'Arial, sans-serif',
     lineHeight: 1.8,
@@ -49,7 +51,7 @@ const styles = {
     backgroundColor: '#f9f9f9', // Light background color
     minHeight: '100vh', // Full height of the viewport
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column' as const,
   },
   header: {
     backgroundColor: '#4CAF50', // Light green header
