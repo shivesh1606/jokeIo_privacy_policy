@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'jokeio' | 'finance' | 'tippy'>('jokeio');
+  const [activeTab, setActiveTab] = useState<'jokeio' | 'finance' | 'tippy' | 'vpn'>('jokeio');
 
 
   return (
@@ -41,14 +41,23 @@ const App: React.FC = () => {
           >
             Tippy
           </button>
+          <button
+            onClick={() => setActiveTab('vpn')}
+            style={{
+              ...styles.tabButton,
+              backgroundColor: activeTab === 'vpn' ? '#388e3c' : '#4CAF50',
+            }}
+          >
+            VPN Core
+          </button>
         </div>
       </header>
 
       <main style={styles.main}>
-        {/* Update rendering logic */}
         {activeTab === 'jokeio' ? <JokeIoPolicy /> :
           activeTab === 'finance' ? <FinancePolicy /> :
-            <TippyPolicy />}
+            activeTab === 'tippy' ? <TippyPolicy /> :
+              <VpnPolicy />}
       </main>
 
       <footer style={styles.footer}>
@@ -63,6 +72,65 @@ const App: React.FC = () => {
   );
 };
 
+// 4. THE VPN POLICY COMPONENT
+const VpnPolicy = () => (
+  <>
+    <section style={styles.section}>
+      <h2>Introduction</h2>
+      <p>
+        The VPN Core app is built with a "Privacy-First" architecture. This policy outlines our commitment to your digital anonymity and the technical measures we take to protect your data.
+      </p>
+    </section>
+
+    <section style={styles.section}>
+      <h2>Strict No-Logs Policy</h2>
+      <p>
+        <strong>We do not collect, store, or log any of the following:</strong>
+      </p>
+      <ul style={{ paddingLeft: '20px' }}>
+        <li>Your original IP address or the VPN IP address you use.</li>
+        <li>Your browsing history, destination URLs, or DNS queries.</li>
+        <li>Connection timestamps or session durations.</li>
+        <li>Metadata regarding your data usage or traffic patterns.</li>
+      </ul>
+    </section>
+
+    <section style={styles.section}>
+      <h2>Information Handling</h2>
+      <p>
+        The app operates as a stateless tunneling engine. While a connection is active, the app processes network packets entirely in-memory using <strong>high-performance C++ core logic</strong>. No data is written to persistent storage or intercepted by our servers.
+      </p>
+    </section>
+
+    <section style={styles.section}>
+      <h2>Encryption and Security</h2>
+      <p>
+        We utilize industry-standard <strong>Diffie-Hellman Key Exchange</strong> for secure session establishment and custom XOR-based stream ciphers for data encapsulation. This ensures that even if encrypted packets are intercepted, the underlying traffic remains opaque.
+      </p>
+    </section>
+
+    <section style={styles.section}>
+      <h2>Third-Party Services</h2>
+      <p>
+        VPN Core does not use third-party analytics, advertising SDKs, or tracking cookies. We believe that a security tool should not contain tracking code.
+      </p>
+    </section>
+
+    <section style={styles.section}>
+      <h2>Permissions</h2>
+      <p>
+        The app requires the <code>BIND_VPN_SERVICE</code> permission to create a local virtual network interface (TUN). This is used solely to route your device traffic through the encrypted tunnel.
+      </p>
+    </section>
+
+    <section style={styles.section}>
+      <h2>Contact</h2>
+      <p>
+        For technical inquiries regarding our encryption implementation or privacy standards, please contact <a href="mailto:bvenom87@gmail.com">bvenom87@gmail.com</a>.
+      </p>
+    </section>
+  </>
+);
 const JokeIoPolicy = () => (
   <>
     <section style={styles.section}>
